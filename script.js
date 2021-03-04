@@ -6,6 +6,10 @@ var time = 80;
 var questionTitle = document.querySelector("#questions-text")
 var answerContainer = document.querySelector("#answers")
 var currentIndex = 0
+var scores = 0
+var playerInitials = document.querySelector("#playerInitials");
+var scoresArray;
+// playerInitials.value = '';
 
 
 var questions = [
@@ -15,59 +19,92 @@ var questions = [
     options: ["Dog food", "Cat food", "Pasta", "Pack rats"],
     answers: "Dog food",
 },
-{ question: "How long is class?",
-options: ["3 1/2 hours", "2 hours", "14 hours", "4 1/2 hours"],
-    answers: "4 1/2hours",
+{   question: "How long is class?",
+    options: ["3 1/2 hours", "2 hours", "14 hours", "4 1/2 hours"],
+    answers: "4 1/2 hours",
   },
   
   { question: "Is Tucson in California?",
-  options: ["True", "False"],
+    options: ["True", "False"],
     answers: "False",
 },
 
 { question: "How many pets do I have?",
-options: ["3", "2", "0", "5"],
-answers: "0",
+  options: ["3", "2", "0", "5"],
+  answers: "0",
 },
 ];
 
-
-function timerStart (){
-    var count = 80;
-    var interval = setInterval(timerFunction, 1000);
+var interval;
+function timerStart (count = time){
+    if (interval) {
+        clearInterval(interval);
+    }
+    interval = setInterval(timerFunction, 1000);
     function timerFunction (){
         if (count ===0){
             clearInterval(interval);
-            document.getElementById("timer-count").text("Times Up")
+            document.getElementById("timer-count").innerHTML = "Times Up. Try Again";
             return;
         }
-        --count;
-        document.getElementById("timer-count").text(count)
+        count--;
+        time--;
+        document.getElementById("timer-count").innerHTML = count
     }
 }
 
-  startBtn.addEventListener("click", function (e) {
-      // e.preventDefault();
-      timerStart()
-      startPrompt.style.display = "none";
-      timer.style.display = "block";
-      renderQuestion()
-    }
+startBtn.addEventListener("click", function (e) {
+    // e.preventDefault();
+    timerStart()
+    startPrompt.style.display = "none";
+    timer.style.display = "block";
+    renderQuestion()
+}
 );
 
-function renderQuestion(){
-    questionTitle.innerHTML= questions[currentIndex].question;
 
-    for (var burrito of questions[currentIndex].options) {
-       var btn = document.createElement("button")
-       btn.textContent = burrito
-       answerContainer.append(btn)
+
+function renderQuestion(){
+    if (currentIndex < questions.length) {
+        questionTitle.innerHTML= questions[currentIndex].question;
+        answerContainer.innerHTML = ""
+    
+        for (var burrito of questions[currentIndex].options) {
+           var btn = document.createElement("button")
+           btn.textContent = burrito
+           btn.value = burrito
+           btn.addEventListener("click", buttonClick)
+           answerContainer.append(btn)
+        }
+        
+    } else if (currentIndex === questions.length) {
+        if (questions == undefined) {
+            clearInterval(interval);
+            // clearInterval(timeLimit);
+            showEndGame();
+            return;
+        }
+        
     }
+
+    
+}
+function buttonClick(e){
+    e.preventDefault();
+    var isCorrect = questions[currentIndex].answers === e.target.value;
+    console.log(isCorrect, e.target.value, questions[currentIndex].answers);
+    if (isCorrect){
+        scores++;
+    }
+    else {
+        time = time - 10;
+        timerStart(time) 
+    }
+    currentIndex++;
+    renderQuestion()
 }
 
 
-//make function to handle clicking an answer button
-//in that function, evaluate if true/false
-//adjust the score and timer approriately
-//increment current index
-//call render question
+
+
+
