@@ -1,0 +1,60 @@
+When I am taking a code quiz and I click the start button, 
+a timer starts and I am presented with a question.
+When I answer a question then I am presented with another question. 
+If I answer a question incorrectly ,then time is subtracted from the clock.When all questions are answered or the timer reaches 0
+then the game is over. When the game is over ,then I can save my initials and my score. 
+
+HTML
+    start Page
+        Title "Coding Quiz"
+        explain in first page
+        start button
+    questions page
+        timer area
+        questions- find cool javascript facts
+        answers
+        all possible answers
+       
+    end page
+       stores wins and losses
+            print to screen
+        play again?
+        ends timer 
+
+
+javasctipt  
+    start button (add eventListener. "click")
+       * when click happens we start the first question.  
+       * a timer starts (start at 80 secs)
+        *presented with question 1 and 6 possible answers
+        *display 4 answers, 3 wrong, 1 right
+        *2 true/false questions
+       *if wrong when wrong, prompt saying choose a different answer youre wrong, subract 10 secs
+       *else right answer prompt correct then move on to next question
+
+       *** if answer is right time stays same
+            else take 10 secs off timer
+            ask another question
+        
+    
+    
+    page that stores wins and your initials
+
+    prompt to start game with instructions
+
+  timer.textContent = time;
+    setInterval(function (){
+        time--;
+        timer.textContent = time;
+    }, 1000);
+
+    start.style.display="none";
+
+    questionText.textContent = question[0].text;
+
+    question[0].answers.forEach(function(item){
+
+    }
+    )
+
+    

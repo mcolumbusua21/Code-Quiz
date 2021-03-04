@@ -1,0 +1,47 @@
+body {
+  background-color: black;
+  color: white;
+  height: 100%;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    color:#fff;
+    
+  }
+ #heading h1 {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 46px;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+
+}
+#heading {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 20px;
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} 
+#heading button {
+  display: block;
+  width: 20%;
+  border: solid;
+  /* padding: 14px 28px; */
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  /* position: fixed; */
+  /* margin-left: 290px;  */
+   
+}
+.hide {
+  display: none;
+}
