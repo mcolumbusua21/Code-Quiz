@@ -6,9 +6,11 @@ var time = 80;
 var questionTitle = document.querySelector("#questions-text")
 var answerContainer = document.querySelector("#answers")
 var currentIndex = 0
-var scores = 0
-var playerInitials = document.querySelector("#playerInitials");
-var scoresArray;
+var score = 0
+var playerInitials = document.querySelector("#inits");
+var timerCount = document.querySelector("#timer-count")
+var scoreForm = document.querySelector("#score-form")
+var submitButton = document.querySelector("#form-submit")
 // playerInitials.value = '';
 
 
@@ -42,17 +44,17 @@ function timerStart (count = time){
     }
     interval = setInterval(timerFunction, 1000);
     function timerFunction (){
-        if (count ===0){
+        if (time ===0){
             clearInterval(interval);
             document.getElementById("timer-count").innerHTML = "Times Up. Try Again";
             return;
         }
         count--;
         time--;
-        document.getElementById("timer-count").innerHTML = count
+        document.getElementById("timer-count").innerHTML = time
     }
 }
-
+submitButton.addEventListener("click", handleFormSubmit)
 startBtn.addEventListener("click", function (e) {
     // e.preventDefault();
     timerStart()
@@ -61,8 +63,6 @@ startBtn.addEventListener("click", function (e) {
     renderQuestion()
 }
 );
-
-
 
 function renderQuestion(){
     if (currentIndex < questions.length) {
@@ -78,31 +78,69 @@ function renderQuestion(){
         }
         
     } else if (currentIndex === questions.length) {
-        if (questions == undefined) {
-            clearInterval(interval);
-            // clearInterval(timeLimit);
+            // clearInterval(interval);
             showEndGame();
-            return;
-        }
-        
+            return;  
     }
 
     
 }
+function showEndGame (){
+    score =  timerCount.textContent;
+    console.log(score);
+    timer.style.display = "none";
+    scoreForm.style.display = "block";
+}
+function handleFormSubmit (e){
+    e.preventDefault()
+    var user = {
+        score: score,
+        initials: inits.value
+    }
+
+    var scoresArray = JSON.parse(localStorage.getItem("User-Info")) || []
+    scoresArray.push(user)
+    localStorage.setItem("User-Info", JSON.stringify(scoresArray))
+    window.location.replace("leaderboard.html")
+}
+
 function buttonClick(e){
     e.preventDefault();
     var isCorrect = questions[currentIndex].answers === e.target.value;
     console.log(isCorrect, e.target.value, questions[currentIndex].answers);
     if (isCorrect){
-        scores++;
+        score++;
     }
     else {
         time = time - 10;
-        timerStart(time) 
+        
     }
     currentIndex++;
     renderQuestion()
 }
+// function submitAndSaveScore(answers) {
+//     answers.preventDefault();
+//         if (playerInitials.value.trim() == ""){
+//             if (alertBoxdiv.style != "display:block") {
+//                 alertBoxdiv.style = "display:block";
+
+//                 setTimeout(function (){
+//                     alertBoxdiv.style = "display: none;";
+//                 }, 1000);
+//             }
+//             return;
+//         }else {
+//             var newHighScore = {
+//                 initials: playerInitials.value.toUpperCase().trim(),
+//                 score: time
+//             };
+//         scoresArray.push(newHighScore);
+//         scoresArray.sort(function (answers) { return });
+//         localStorage.setItem("localHighScores", JSON.stringify(scoresArray));
+//         window.location.href = "./scores.html"
+//         }
+//     }
+
 
 
 
