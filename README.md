@@ -18,3 +18,7 @@ When there are no questions left, or when time runs out, hide the quiz and show 
 • CSS
 • JavaScript
 
+https://mcolumbusua21.github.io/Code-Quiz/
+
+![Screen Shot]page.png
+![Screen Shot]code.png
