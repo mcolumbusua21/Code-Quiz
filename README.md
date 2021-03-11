@@ -20,5 +20,4 @@ When there are no questions left, or when time runs out, hide the quiz and show 
 
 https://mcolumbusua21.github.io/Code-Quiz/
 
-![Screen Shot]page.png
-![Screen Shot]code.png
+![Code Quiz](https://user-images.githubusercontent.com/78819536/110811321-d4d3c480-8243-11eb-864b-09458a7323f7.png)
